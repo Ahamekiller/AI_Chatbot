@@ -57,6 +57,7 @@ button:hover {
 .intro-message {
   display: flex;
   margin-bottom: 10px;
+  align-items: flex-start;
 }
 
 .ai-message img,
