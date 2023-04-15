@@ -23,7 +23,7 @@ body {
   overflow-y: auto;
   padding: 20px;
   border-bottom: 1px solid #ddd;
-  position: relative; /* 添加这一行 */
+  position: relative;
 }
 
 .input-container {
@@ -75,7 +75,7 @@ button:hover {
   background-color: #f1f0f0;
   padding: 8px;
   border-radius: 4px;
-  word-wrap: break-word; /* 添加这一行 */
+  word-wrap: break-word;
 }
 
 .user-message {
@@ -94,10 +94,29 @@ button:hover {
 .intro-message {
   align-items: flex-start;
 }
+
 .ai-message pre,
 .user-message pre {
   margin: 0;
   font-family: inherit;
   white-space: pre-wrap;
   word-wrap: break-word;
+}
+
+/* 新添加的样式规则 */
+.chat-intro {
+  display: flex;
+  align-items: flex-start;
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.ai-icon {
+  width: 32px;
+  height: 32px;
+  margin-right: 10px;
+}
+
+.intro-text {
+  line-height: 1.6;
 }
