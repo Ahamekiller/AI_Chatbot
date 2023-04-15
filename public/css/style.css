@@ -53,20 +53,23 @@ button:hover {
 }
 
 .ai-message,
-.user-message {
+.user-message,
+.intro-message {
   display: flex;
   margin-bottom: 10px;
 }
 
 .ai-message img,
-.user-message img {
+.user-message img,
+.intro-message img {
   width: 32px;
   height: 32px;
   margin-right: 5px;
 }
 
 .ai-message div,
-.user-message div {
+.user-message div,
+.intro-message div {
   background-color: #f1f0f0;
   padding: 8px;
   border-radius: 4px;
@@ -83,4 +86,8 @@ button:hover {
 
 .user-message div {
   background-color: #cce5ff;
+}
+
+.intro-message {
+  align-items: flex-start;
 }
