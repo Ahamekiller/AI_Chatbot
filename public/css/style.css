@@ -54,6 +54,39 @@ button:hover {
 
 /* ...现有样式... */
 /* ...现有样式... */
+/* ...现有样式... */
+
+.ai-icon,
+.user-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+}
+
+.chat-intro {
+  display: flex;
+  align-items: flex-start;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #ddd;
+}
+
+.intro-text {
+  text-align: left;
+}
+
+.chat-intro p {
+  margin: 0 0 10px;
+}
+
+.chat-intro p:last-child {
+  margin-bottom: 0;
+}
+
+/* ...现有样式... */
+
 
 .chat-intro {
     padding: 20px;
