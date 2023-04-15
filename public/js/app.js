@@ -30,9 +30,22 @@ document.addEventListener('DOMContentLoaded', () => {
     function appendMessage(message, sender) {
       const messageDiv = document.createElement('div');
       messageDiv.className = sender === 'user' ? 'user-message' : 'ai-message';
-      messageDiv.textContent = message;
       chatWindow.appendChild(messageDiv);
       chatWindow.scrollTop = chatWindow.scrollHeight;
+    
+      if (sender === 'ai') {
+        let index = 0;
+        function typeWriter() {
+          if (index < message.length) {
+            messageDiv.textContent += message.charAt(index);
+            index++;
+            setTimeout(typeWriter, 50);
+          }
+        }
+        typeWriter();
+      } else {
+        messageDiv.textContent = message;
+      }
     }
   });
   

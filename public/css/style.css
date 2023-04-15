@@ -51,3 +51,29 @@ button {
 button:hover {
     background-color: #0056b3;
 }
+
+/* ...现有样式... */
+
+.user-message,
+.ai-message {
+  display: inline-block;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  border-radius: 18px;
+  max-width: 70%;
+  word-wrap: break-word;
+}
+
+.user-message {
+  background-color: #007bff;
+  color: white;
+  float: right;
+  clear: both;
+}
+
+.ai-message {
+  background-color: #f1f0f0;
+  color: #333;
+  float: left;
+  clear: both;
+}
