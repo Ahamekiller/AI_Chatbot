@@ -53,6 +53,24 @@ button:hover {
 }
 
 /* ...现有样式... */
+/* ...现有样式... */
+
+.chat-intro {
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .chat-intro p {
+    margin: 0 0 10px;
+  }
+  
+  .chat-intro p:last-child {
+    margin-bottom: 0;
+  }
+  
+  /* ...现有样式... */
 
 .user-message,
 .ai-message {
