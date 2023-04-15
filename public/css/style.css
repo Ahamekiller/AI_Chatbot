@@ -76,7 +76,7 @@ button:hover {
   padding: 8px;
   border-radius: 4px;
   word-wrap: break-word;
-  margin-right: 64px; /* 添加此行以调整AI回复信息的右边距 */
+  max-width: calc(100% - 64px); /* 添加此行以限制AI回复信息的最大宽度 */
 }
 
 .user-message {
@@ -90,7 +90,7 @@ button:hover {
 
 .user-message div {
   background-color: #cce5ff;
-  margin-right: 64px; /* 添加此行以调整AI回复信息的右边距 */
+  max-width: calc(100% - 64px); /* 添加此行以限制用户输入内容的最大宽度 */
 }
 
 .intro-message {
