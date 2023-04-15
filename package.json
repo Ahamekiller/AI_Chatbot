@@ -6,9 +6,13 @@
   "scripts": {
     "start": "node server/server.js",
     "dev": "nodemon server/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
+    "test": "echo \"No tests available\""
+  } ,
+  "keywords": [
+    "your",
+    "keywords",
+    "here"
+  ],
   "author": "Andy",
   "license": "ISC",
   "dependencies": {
