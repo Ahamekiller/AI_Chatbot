@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     iconImg.alt = sender === 'user' ? 'User Icon' : 'AI Icon';
     iconImg.className = sender === 'user' ? 'user-icon' : 'ai-icon';
 
-    const messageText = document.createElement('div');
+    const messageText = document.createElement('pre');
     messageText.textContent = message;
 
     messageDiv.appendChild(iconImg);

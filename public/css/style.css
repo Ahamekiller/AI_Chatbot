@@ -94,3 +94,10 @@ button:hover {
 .intro-message {
   align-items: flex-start;
 }
+.ai-message pre,
+.user-message pre {
+  margin: 0;
+  font-family: inherit;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
