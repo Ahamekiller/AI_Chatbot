@@ -28,7 +28,6 @@ body {
 
 .input-container {
   display: flex;
-  align-items: flex-start; /* 修改此行以使按钮和输入框对齐 */
   padding: 10px;
 }
 
@@ -45,8 +44,6 @@ textarea {
   font-family: Arial, sans-serif; /* 设置字体，使其与其他文本一致 */
   font-size: 14px; /* 设置字体大小，使其与其他文本一致 */
 }
-
-/*...之前的CSS代码...*/
 
 button {
   background-color: #007BFF;
@@ -80,14 +77,13 @@ button:hover {
   vertical-align: middle; /* 添加这一行 */
 }
 
-.ai-message div,
-.user-message div,
-.intro-message div {
+.ai-message div {
   background-color: #f1f0f0;
   padding: 8px;
   border-radius: 4px;
   word-wrap: break-word;
-  max-width:70%; /* 添加此行以限制AI回复信息的最大宽度 */
+  max-width: 70%; /* 添加此行以限制AI回复信息的最大宽度 */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
 }
 
 .user-message {
@@ -100,7 +96,10 @@ button:hover {
 }
 
 .user-message div {
-  background-color: #cce5ff;
+  background-color: #92e1a6; /* 设置绿色背景色 */
+  padding: 8px;
+  border-radius: 4px;
+  word-wrap: break-word;
   max-width: 70%; /* 添加此行以限制用户输入内容的最大宽度 */
 }
 
@@ -133,4 +132,3 @@ button:hover {
 .intro-text {
   line-height: 1.6;
 }
-
