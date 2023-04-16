@@ -3,6 +3,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const sendButton = document.getElementById('send-button');
   const chatWindow = document.getElementById('chat-window');
 
+  const introMessage = `我是您的私人助理，您可以向我提出任何问题，我将给您需要的答案。
+
+如：
+
+推荐我十部人工智能题材的电影，按关注度高低排序。
+
+我想写一篇《猪脑存储数据的可行性方案》的论文，请列出大纲来。
+
+我叫韩梅梅，今年23岁，毕业于广州外国语学院，请帮我写一份简历。
+
+请做一个一元二次方程的教学PPT大纲，要求8页内容。`;
+
+  appendMessage(introMessage, 'ai');
+
   sendButton.addEventListener('click', () => {
     const message = inputMessage.value;
     if (!message) return;
@@ -59,3 +73,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 });
+
