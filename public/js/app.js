@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
     iconImg.className = sender === 'user' ? 'user-icon' : 'ai-icon';
 
     const messageText = document.createElement('pre');
-    
 
     messageDiv.appendChild(iconImg);
     messageDiv.appendChild(messageText);
@@ -60,4 +59,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 });
-

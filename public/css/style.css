@@ -42,7 +42,7 @@ textarea {
   min-height: 20px; /* 设置最小高度 */
   max-height: 80px; /* 设置最大高度 */
   overflow-y: auto; /* 启用垂直滚动条 */
-   font-family: Arial, sans-serif; /* 设置字体，使其与其他文本一致 */
+  font-family: Arial, sans-serif; /* 设置字体，使其与其他文本一致 */
   font-size: 14px; /* 设置字体大小，使其与其他文本一致 */
 }
 
