@@ -136,3 +136,11 @@ button:hover {
   width: 24px;
   height: 24px;
 }
+
+.user-message > pre {
+  margin-left: 40px;
+}
+
+.ai-message > pre {
+  margin-right: 40px;
+}
