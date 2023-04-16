@@ -67,18 +67,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (index < message.length) {
           messageText.textContent += message.charAt(index);
           index++;
-          setTimeout(typeWriter, 25);
+          requestAnimationFrame(typeWriter);
         } else {
           chatWindow.scrollTop = chatWindow.scrollHeight;
         }
       }
-      typeWriter();
-    } else {
-      messageText.textContent = message;
     }
   }
-
-  function displayLoading(isVisible) {
+    function displayLoading(isVisible) {
     loadingElement.style.display = isVisible ? 'block' : 'none';
   }
 });
