@@ -58,7 +58,7 @@ button:hover {
 .intro-message {
   display: flex;
   margin-bottom: 10px;
-  align-items: flex-start;
+  align-items: center; /* 修改这一行 */
 }
 
 .ai-message img,
@@ -67,7 +67,6 @@ button:hover {
   width: 32px;
   height: 32px;
   margin-right: 5px;
-  align-self: center; /* 添加这一行 */
 }
 
 .ai-message div,
