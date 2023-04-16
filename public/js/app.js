@@ -4,11 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const chatWindow = document.getElementById('chat-window');
   const loadingElement = document.getElementById('loading');
 
-  let isVisible = true;
-  document.addEventListener('visibilitychange', () => {
-    isVisible = !document.hidden;
-  });
-
   const introMessage = `我是您的私人助理，您可以向我提出任何问题，我将给您需要的答案。
 
 如：
@@ -63,34 +58,27 @@ document.addEventListener('DOMContentLoaded', () => {
     messageDiv.appendChild(iconImg);
     messageDiv.appendChild(messageText);
     chatWindow.appendChild(messageDiv);
+    chatWindow.scrollTop = chatWindow.scrollHeight;
 
     if (sender === 'ai') {
       messageText.textContent = '';
       let index = 0;
-      const interval = setInterval(() => {
+      function typeWriter() {
         if (index < message.length) {
           messageText.textContent += message.charAt(index);
           index++;
-          if (isScrolledToBottom()) {
-            chatWindow.scrollTop = chatWindow.scrollHeight;
-          }
+          setTimeout(typeWriter, 25);
         } else {
-          clearInterval(interval);
+          chatWindow.scrollTop = chatWindow.scrollHeight;
         }
-      }, 50);
+      }
+      typeWriter();
     } else {
       messageText.textContent = message;
     }
   }
 
-  function isScrolledToBottom() {
-      return (
-        chatWindow.scrollHeight - chatWindow.clientHeight <=
-        chatWindow.scrollTop + 1
-      );
-    }
-  
   function displayLoading(isVisible) {
-      loadingElement.style.display = isVisible ? 'block' : 'none';
-    }
-  });
+    loadingElement.style.display = isVisible ? 'block' : 'none';
+  }
+});
