@@ -27,11 +27,18 @@ body {
 
 .chat-window {
   flex-grow: 1; /* 添加此行以使 chat-window 占用可用空间 */
-  overflow-y: auto;
-  overflow-x: hidden; /* 添加此行以隐藏水平滚动条 */
   padding: 20px;
   border-bottom: 1px solid #ddd;
   position: relative;
+  overflow-y: auto; /* 修改此行以使垂直滚动条在内容增多时自动出现 */
+  overflow-x: hidden; /* 添加此行以隐藏水平滚动条 */
+  scrollbar-width: none; /* 添加此行以隐藏 Firefox 中的滚动条 */
+  -ms-overflow-style: none; /* 添加此行以隐藏 IE 和 Edge 中的滚动条 */
+}
+
+/* 添加以下规则以在 WebKit 浏览器中隐藏滚动条 */
+.chat-window::-webkit-scrollbar {
+  display: none;/* 添加此行以隐藏 Chrome、Safari 和 Opera 中的滚动条 */
 }
 
 .input-container {
@@ -116,4 +123,16 @@ button:hover {
   font-family: inherit;
   white-space: pre-wrap;
   word-wrap: break-word;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50px;
+}
+
+.loading img {
+  width: 24px;
+  height: 24px;
 }

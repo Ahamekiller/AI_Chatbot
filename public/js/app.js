@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const inputMessage = document.getElementById('input-message');
   const sendButton = document.getElementById('send-button');
   const chatWindow = document.getElementById('chat-window');
+  const loadingElement = document.getElementById('loading');
 
   const introMessage = `我是您的私人助理，您可以向我提出任何问题，我将给您需要的答案。
 
@@ -22,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!message) return;
 
     appendMessage(message, 'user');
+    displayLoading(true);
 
     fetch('/api/message', {
       method: 'POST',
@@ -32,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
       .then(response => response.json())
       .then(data => {
+        displayLoading(false);
         appendMessage(data.reply, 'ai');
       })
       .catch(error => {
@@ -58,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     chatWindow.scrollTop = chatWindow.scrollHeight;
 
     if (sender === 'ai') {
-      messageText.textContent = ''; // 添加这一行，确保开始时文本内容为空
+      messageText.textContent = '';
       let index = 0;
       function typeWriter() {
         if (index < message.length) {
@@ -69,8 +72,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       typeWriter();
     } else {
-      messageText.textContent = message; // 将这一行移到这里
+      messageText.textContent = message;
     }
   }
-});
 
+  function displayLoading(isVisible) {
+    loadingElement.style.display = isVisible ? 'block' : 'none';
+  }
+});
