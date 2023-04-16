@@ -4,6 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const chatWindow = document.getElementById('chat-window');
   const loadingElement = document.getElementById('loading');
 
+  let isVisible = true;
+  document.addEventListener('visibilitychange', () => {
+    isVisible = !document.hidden;
+  });
+
   const introMessage = `我是您的私人助理，您可以向我提出任何问题，我将给您需要的答案。
 
 如：
@@ -67,7 +72,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (index < message.length) {
           messageText.textContent += message.charAt(index);
           index++;
-          setTimeout(typeWriter, 50);
+          chatWindow.scrollTop = chatWindow.scrollHeight;
+          const delay = isVisible ? 50 : 0;
+          requestAnimationFrame(() => setTimeout(typeWriter, delay));
         }
       }
       typeWriter();
