@@ -61,7 +61,8 @@ button:hover {
 
 .ai-message,
 .user-message,
-.intro-message {
+.intro-message,
+.chat-intro {/* 添加 .chat-intro */
   display: flex;
   margin-bottom: 10px;
   align-items: center; /* 修改这一行 */
@@ -77,7 +78,8 @@ button:hover {
   vertical-align: middle; /* 添加这一行 */
 }
 
-.ai-message div {
+.ai-message div
+.chat-intro { /* 添加 .chat-intro */
   background-color: #f1f0f0;
   padding: 8px;
   border-radius: 4px;
@@ -116,12 +118,6 @@ button:hover {
 }
 
 /* 新添加的样式规则 */
-.chat-intro {
-  display: flex;
-  align-items: flex-start;
-  padding: 20px;
-  border-bottom: 1px solid #ddd;
-}
 
 .ai-icon {
   width: 32px;
