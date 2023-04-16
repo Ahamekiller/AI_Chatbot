@@ -11,9 +11,9 @@ body {
 
 .chat-container {
   width: 100%;/* 修改此行以使容器在默认情况下占用100%宽度 */
-  max-width: 600px;
+ /*max-width: 600px;*/
   height: 100%; /* 修改此行以使容器在默认情况下占用100%高度 */
-  max-height: 800px; /* 添加此行以限制最大高度 */
+ /*  max-height: 800px; 添加此行以限制最大高度 */
   background-color: white;
   border: 1px solid #ddd;
   border-radius: 5px;
