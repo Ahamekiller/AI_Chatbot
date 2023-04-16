@@ -4,6 +4,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const chatWindow = document.getElementById('chat-window');
   const loadingElement = document.getElementById('loading');
 
+  let sessionId = localStorage.getItem('sessionId');
+
+  if (!sessionId) {
+    sessionId = generateUUID();
+    localStorage.setItem('sessionId', sessionId);
+  }
+
+  function generateUUID() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      const r = Math.random() * 16 | 0;
+      const v = c === 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  }
+
   const introMessage = `我是您的私人助理，您可以向我提出任何问题，我将给您需要的答案。
 
 如：
@@ -30,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ message })
+      body: JSON.stringify({ message, sessionId }) // 添加 sessionId 到请求
     })
       .then(response => response.json())
       .then(data => {
@@ -67,9 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (index < message.length) {
           messageText.textContent += message.charAt(index);
           index++;
-          setTimeout(typeWriter, 25);
-        } else {
-          chatWindow.scrollTop = chatWindow.scrollHeight;
+          setTimeout(typeWriter, 50);
         }
       }
       typeWriter();
@@ -77,7 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
       messageText.textContent = message;
     }
   }
-    function displayLoading(isVisible) {
+
+  function displayLoading(isVisible) {
     loadingElement.style.display = isVisible ? 'block' : 'none';
   }
 });
