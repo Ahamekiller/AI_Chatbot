@@ -8,13 +8,14 @@ body {
   height: 100vh;
   width: 100vw; /* 添加此行以使 body 宽度填充整个视口 */
   background-color: #f5f5f5;
+  overflow: auto; /* 添加此行以使滚动条在内容增多时自动出现 */
   overflow-x: hidden; /* 添加此行以隐藏水平滚动条 */
   overflow-y: auto; /* 添加此行以使垂直滚动条在内容增多时自动出现 */
 }
 
 .chat-container {
   width: 100%;/* 修改此行以使容器在默认情况下占用100%宽度 */
-  height: 100%; /* 修改此行以使容器在默认情况下占用100%高度 */
+  height: auto; /* 修改此行以使容器在默认情况下占用100%高度 */
   max-width: 100%; /* 添加此行以确保容器不超出屏幕宽度 */
   background-color: white;
   border: 1px solid #ddd;
