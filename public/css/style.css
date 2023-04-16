@@ -82,7 +82,7 @@ button:hover {
   padding: 8px;
   border-radius: 4px;
   word-wrap: break-word;
-  max-width: 70%; /* 添加此行以限制AI回复信息的最大宽度 */
+  max-width: 85%; /* 添加此行以限制AI回复信息的最大宽度 */
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
 }
 
@@ -100,7 +100,7 @@ button:hover {
   padding: 8px;
   border-radius: 4px;
   word-wrap: break-word;
-  max-width: 70%; /* 添加此行以限制用户输入内容的最大宽度 */
+  max-width: 85%; /* 添加此行以限制用户输入内容的最大宽度 */
 }
 
 .intro-message {
