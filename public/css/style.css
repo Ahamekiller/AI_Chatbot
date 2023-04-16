@@ -6,30 +6,24 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  width: 100vw; /* 添加此行以使 body 宽度填充整个视口 */
   background-color: #f5f5f5;
 }
 
 .chat-container {
   width: 100%;/* 修改此行以使容器在默认情况下占用100%宽度 */
-  max-width: 600px;/*添加此行以限制最大宽度 */
   height: 100%; /* 修改此行以使容器在默认情况下占用100%高度 */
-  max-height: 800px; /*添加此行以限制最大高度 */
   background-color: white;
   border: 1px solid #ddd;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex; /* 添加此行以使 chat-window 和 input-container 垂直堆叠 */
+  flex-direction: column; /* 添加此行以使 chat-window 和 input-container 垂直堆叠 */
 }
 
-/* 添加此媒体查询以在大屏幕上使容器居中 */
-@media (min-width: 768px) {
-  .chat-container {
-    width: 80%;
-    height: auto; /* 修改此行以使容器高度自动调整 */
-  }
-}
 
 .chat-window {
-  max-height: 400px;
+  flex-grow: 1; /* 添加此行以使 chat-window 占用可用空间 */
   overflow-y: auto;
   padding: 20px;
   border-bottom: 1px solid #ddd;
