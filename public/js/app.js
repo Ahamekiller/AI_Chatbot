@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     iconImg.className = sender === 'user' ? 'user-icon' : 'ai-icon';
 
     const messageText = document.createElement('pre');
-    messageText.textContent = message;
+    
 
     messageDiv.appendChild(iconImg);
     messageDiv.appendChild(messageText);
@@ -55,6 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
       typeWriter();
+    } else {
+      messageText.textContent = message; // 将这一行移到这里
     }
   }
 });
