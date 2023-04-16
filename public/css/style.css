@@ -67,6 +67,8 @@ button:hover {
   width: 32px;
   height: 32px;
   margin-right: 5px;
+  display: inline-block; /* 添加这一行 */
+  vertical-align: middle; /* 添加这一行 */
 }
 
 .ai-message div,
@@ -103,8 +105,6 @@ button:hover {
   font-family: inherit;
   white-space: pre-wrap;
   word-wrap: break-word;
-  display: inline-block; /* 添加这一行 */
-  vertical-align: middle; /* 添加这一行 */
 }
 
 /* 新添加的样式规则 */
