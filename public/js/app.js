@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (index < message.length) {
           messageText.textContent += message.charAt(index);
           index++;
-          setTimeout(typeWriter, 50);
+          setTimeout(typeWriter, 25);
         }
       }
       typeWriter();
