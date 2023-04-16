@@ -28,6 +28,7 @@ body {
 
 .input-container {
   display: flex;
+  align-items: flex-start; /* 修改此行以使按钮和输入框对齐 */
   padding: 10px;
 }
 
@@ -37,11 +38,15 @@ textarea {
   border-radius: 4px;
   padding: 8px;
   outline: none;
-  resize: none;
-  overflow: auto;
-  min-height: 32px;
-  max-height: 192px;
+  resize: none; /* 禁止手动调整大小 */
+  min-height: 20px; /* 设置最小高度 */
+  max-height: 80px; /* 设置最大高度 */
+  overflow-y: auto; /* 启用垂直滚动条 */
+   font-family: Arial, sans-serif; /* 设置字体，使其与其他文本一致 */
+  font-size: 14px; /* 设置字体大小，使其与其他文本一致 */
 }
+
+/*...之前的CSS代码...*/
 
 button {
   background-color: #007BFF;
@@ -62,7 +67,7 @@ button:hover {
 .intro-message {
   display: flex;
   margin-bottom: 10px;
-  align-items: center;
+  align-items: center; /* 修改这一行 */
 }
 
 .ai-message img,
@@ -71,8 +76,8 @@ button:hover {
   width: 32px;
   height: 32px;
   margin-right: 5px;
-  display: inline-block;
-  vertical-align: middle;
+  display: inline-block; /* 添加这一行 */
+  vertical-align: middle; /* 添加这一行 */
 }
 
 .ai-message div,
@@ -82,7 +87,7 @@ button:hover {
   padding: 8px;
   border-radius: 4px;
   word-wrap: break-word;
-  max-width:70%;
+  max-width:70%; /* 添加此行以限制AI回复信息的最大宽度 */
 }
 
 .user-message {
@@ -96,7 +101,7 @@ button:hover {
 
 .user-message div {
   background-color: #cce5ff;
-  max-width: 70%;
+  max-width: 70%; /* 添加此行以限制用户输入内容的最大宽度 */
 }
 
 .intro-message {
@@ -111,6 +116,7 @@ button:hover {
   word-wrap: break-word;
 }
 
+/* 新添加的样式规则 */
 .chat-intro {
   display: flex;
   align-items: flex-start;
@@ -127,3 +133,4 @@ button:hover {
 .intro-text {
   line-height: 1.6;
 }
+
