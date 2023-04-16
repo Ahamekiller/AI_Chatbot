@@ -14,6 +14,11 @@ body {
 }
 
 .chat-container {
+  position: absolute; /* 添加此行 */
+  top: 0; /* 添加此行 */
+  bottom: 0; /* 添加此行 */
+  left: 0; /* 添加此行 */
+  right: 0; /* 添加此行 */
   width: 100%;/* 修改此行以使容器在默认情况下占用100%宽度 */
   height: auto; /* 修改此行以使容器在默认情况下占用100%高度 */
   max-width: 100%; /* 添加此行以确保容器不超出屏幕宽度 */
