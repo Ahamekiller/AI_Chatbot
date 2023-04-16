@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     chatWindow.scrollTop = chatWindow.scrollHeight;
 
     if (sender === 'ai') {
+      messageText.textContent = ''; // 添加这一行，确保开始时文本内容为空
       let index = 0;
       function typeWriter() {
         if (index < message.length) {
