@@ -31,12 +31,16 @@ body {
   padding: 10px;
 }
 
-input[type="text"] {
+textarea {
   flex-grow: 1;
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 8px;
   outline: none;
+  resize: none;
+  overflow: auto;
+  min-height: 32px;
+  max-height: 192px;
 }
 
 button {
@@ -58,7 +62,7 @@ button:hover {
 .intro-message {
   display: flex;
   margin-bottom: 10px;
-  align-items: center; /* 修改这一行 */
+  align-items: center;
 }
 
 .ai-message img,
@@ -67,8 +71,8 @@ button:hover {
   width: 32px;
   height: 32px;
   margin-right: 5px;
-  display: inline-block; /* 添加这一行 */
-  vertical-align: middle; /* 添加这一行 */
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .ai-message div,
@@ -78,7 +82,7 @@ button:hover {
   padding: 8px;
   border-radius: 4px;
   word-wrap: break-word;
-  max-width:70%; /* 添加此行以限制AI回复信息的最大宽度 */
+  max-width:70%;
 }
 
 .user-message {
@@ -92,7 +96,7 @@ button:hover {
 
 .user-message div {
   background-color: #cce5ff;
-  max-width: 70%; /* 添加此行以限制用户输入内容的最大宽度 */
+  max-width: 70%;
 }
 
 .intro-message {
@@ -107,7 +111,6 @@ button:hover {
   word-wrap: break-word;
 }
 
-/* 新添加的样式规则 */
 .chat-intro {
   display: flex;
   align-items: flex-start;
