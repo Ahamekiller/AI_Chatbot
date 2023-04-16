@@ -61,11 +61,10 @@ button:hover {
 
 .ai-message,
 .user-message,
-.intro-message,
-.chat-intro {/* 添加 .chat-intro */
+.intro-message {
   display: flex;
   margin-bottom: 10px;
-  align-items: center; /* 修改这一行 */
+  align-items: flex-start; /* 修改这一行 */
 }
 
 .ai-message img,
@@ -78,13 +77,13 @@ button:hover {
   vertical-align: middle; /* 添加这一行 */
 }
 
-.ai-message div
-.chat-intro { /* 添加 .chat-intro */
+.ai-message div,
+.intro-message { /* 添加 .intro-message */
   background-color: #f1f0f0;
   padding: 8px;
   border-radius: 4px;
   word-wrap: break-word;
-  max-width: 83%; /* 添加此行以限制AI回复信息的最大宽度 */
+  max-width: 70%; /* 添加此行以限制AI回复信息的最大宽度 */
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
 }
 
@@ -102,7 +101,7 @@ button:hover {
   padding: 8px;
   border-radius: 4px;
   word-wrap: break-word;
-  max-width: 83%; /* 添加此行以限制用户输入内容的最大宽度 */
+  max-width: 84%; /* 添加此行以限制用户输入内容的最大宽度 */
 }
 
 .intro-message {
