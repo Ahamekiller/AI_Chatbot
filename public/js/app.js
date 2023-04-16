@@ -63,27 +63,34 @@ document.addEventListener('DOMContentLoaded', () => {
     messageDiv.appendChild(iconImg);
     messageDiv.appendChild(messageText);
     chatWindow.appendChild(messageDiv);
-    chatWindow.scrollTop = chatWindow.scrollHeight;
 
     if (sender === 'ai') {
       messageText.textContent = '';
       let index = 0;
-      function typeWriter() {
+      const interval = setInterval(() => {
         if (index < message.length) {
           messageText.textContent += message.charAt(index);
           index++;
-          chatWindow.scrollTop = chatWindow.scrollHeight;
-          const delay = isVisible ? 50 : 0;
-          requestAnimationFrame(() => setTimeout(typeWriter, delay));
+          if (isScrolledToBottom()) {
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+          }
+        } else {
+          clearInterval(interval);
         }
-      }
-      typeWriter();
+      }, 50);
     } else {
       messageText.textContent = message;
     }
   }
 
+  function isScrolledToBottom() {
+      return (
+        chatWindow.scrollHeight - chatWindow.clientHeight <=
+        chatWindow.scrollTop + 1
+      );
+    }
+  
   function displayLoading(isVisible) {
-    loadingElement.style.display = isVisible ? 'block' : 'none';
-  }
-});
+      loadingElement.style.display = isVisible ? 'block' : 'none';
+    }
+  });
