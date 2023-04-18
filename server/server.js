@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 const chatHistory = {};
 app.post('/api/message', async (req, res) => {
   try {
-    const sessionId = req.sessionID;
+    const sessionId = req.body.sessionId;
     const message = req.body.message;
 
     if (!chatHistory[sessionId]) {
