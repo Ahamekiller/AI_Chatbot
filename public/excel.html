@@ -21,19 +21,32 @@
 </head>
 <body>
   <h1>2023年收鸽信息</h1>
-  <button id="load-excel-data">载入数据</button>
   <input type="text" id="search-input" placeholder="请输入信息">
   <button id="search-button">搜索</button>
   <button id="download-excel-data"><a href="data.xlsx" download="data.xlsx" style="text-decoration: none; color: inherit;">下载文件</a></button>
+  <div style="clear: both;">
+    <div id="data-count"></div>
+    <div id="pagination"></div>
+  </div>
   <table id="excel-data">
     <thead></thead>
     <tbody></tbody>
   </table>
 
+
+  <div id="page-info"></div>
+  <nav id="pagination">
+    <button id="prev-page" disabled>上一页</button>
+    <span id="page-numbers"></span>
+    <button id="next-page" disabled>下一页</button>
+  </nav>
+
   <script>
     let tableData = [];
+    let currentPage = 1;
+    const itemsPerPage = 50;
 
-    function displayExcelData(data) {
+    function displayExcelData(data, startIndex) {
       const table = document.getElementById("excel-data");
       const thead = table.querySelector("thead");
       const tbody = table.querySelector("tbody");
@@ -52,7 +65,7 @@
       thead.appendChild(headerRow);
 
       // Add table rows
-      for (let i = 1; i < data.length; i++) {
+      for (let i = startIndex; i < Math.min(startIndex + itemsPerPage, data.length); i++) {
         const rowData = data[i];
         const tr = document.createElement("tr");
         for (const cellData of rowData) {
@@ -63,7 +76,6 @@
         tbody.appendChild(tr);
       }
     }
-
     function searchTableData(keyword) {
       if (!tableData.length) return;
 
@@ -73,10 +85,63 @@
         });
       });
 
-      displayExcelData([tableData[0], ...filteredData]);
+      displayExcelData([tableData[0], ...filteredData], 1);
+      createPagination(filteredData.length);
     }
 
-    document.getElementById("load-excel-data").addEventListener("click", () => {
+    function createPagination(itemsCount) {
+      const prevPageBtn = document.getElementById("prev-page");
+      const nextPageBtn = document.getElementById("next-page");
+      const pageNums = document.getElementById("page-numbers");
+
+      const pageCount = Math.ceil((itemsCount - 1) / itemsPerPage);
+
+      document.getElementById("page-info").textContent = `共有 ${itemsCount - 1} 条数据    页码：${currentPage}/${pageCount}`;
+
+      pageNums.innerHTML = "";
+
+      if (itemsCount <= itemsPerPage + 1) {
+        prevPageBtn.setAttribute("disabled", "");
+        nextPageBtn.setAttribute("disabled", "");
+        return;
+      }
+
+      prevPageBtn.removeAttribute("disabled");
+      nextPageBtn.removeAttribute("disabled");
+
+      for (let i = 1; i <= Math.min(5, pageCount); i++) {
+        const button = document.createElement("button");
+        button.textContent = i;
+        button.addEventListener("click", () => {
+          currentPage = i;
+          displayExcelData(tableData, (i - 1) * itemsPerPage + 1);
+          createPagination(itemsCount);
+        });
+        pageNums.appendChild(button);
+      }
+
+      if (pageCount > 5) {
+        pageNums.innerHTML += "...";
+      }
+
+      prevPageBtn.addEventListener("click", () => {
+        if (currentPage > 1) {
+          currentPage--;
+          displayExcelData(tableData, (currentPage - 1) * itemsPerPage + 1);
+          createPagination(itemsCount);
+        }
+      });
+
+      nextPageBtn.addEventListener("click", () => {
+        if (currentPage < pageCount) {
+          currentPage++;
+          displayExcelData(tableData, (currentPage - 1) * itemsPerPage + 1);
+          createPagination(itemsCount);
+        }
+      });
+    }
+
+    function loadData() {
       fetch("/data.xlsx")
         .then((response) => response.arrayBuffer())
         .then((buffer) => {
@@ -87,17 +152,21 @@
           const json = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: "" });
 
           tableData = json;
-          displayExcelData(json);
+          displayExcelData(json, 1);
+          createPagination(json.length);
         })
         .catch((error) => {
           console.error("Error:", error);
         });
-    });
+    }
 
     document.getElementById("search-button").addEventListener("click", () => {
       const searchInput = document.getElementById("search-input");
       searchTableData(searchInput.value);
     });
+
+    // Load data on page load
+    loadData();
   </script>
   <script src="https://unpkg.com/xlsx@0.17.0/dist/xlsx.full.min.js"></script>
 </body>
