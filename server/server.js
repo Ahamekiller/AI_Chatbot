@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const { Configuration, OpenAIApi } = require('openai');
+const path = require('path');
 
 dotenv.config();
 
@@ -44,4 +45,7 @@ app.post('/api/message', async (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
+});
+app.get('/excel', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/excel.html'));
 });
