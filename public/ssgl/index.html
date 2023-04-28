@@ -44,6 +44,7 @@
   <script>
     let tableData = [];
     let currentPage = 1;
+    let filteredData = []; // 新增代码
     const itemsPerPage = 50;
 
     function displayExcelData(data, startIndex) {
@@ -79,67 +80,109 @@
     function searchTableData(keyword) {
       if (!tableData.length) return;
 
-      const filteredData = tableData.filter(row => {
+      filteredData = tableData.filter(row => { // 修改了这一行，将搜索结果赋值给 filteredData 变量
         return row.some(cell => {
           return cell.toString().toLowerCase().includes(keyword.toLowerCase());
         });
       });
-
+      currentPage = 1; // 新增代码，重置当前页数为 1
       displayExcelData([tableData[0], ...filteredData], 1);
       createPagination(filteredData.length);
     }
 
     function createPagination(itemsCount) {
-      const prevPageBtn = document.getElementById("prev-page");
-      const nextPageBtn = document.getElementById("next-page");
-      const pageNums = document.getElementById("page-numbers");
+  const prevPageBtn = document.getElementById("prev-page");
+  const nextPageBtn = document.getElementById("next-page");
+  const pageNums = document.getElementById("page-numbers");
 
-      const pageCount = Math.ceil((itemsCount - 1) / itemsPerPage);
+  const pageCount = Math.ceil((itemsCount - 1) / itemsPerPage);
 
-      document.getElementById("page-info").textContent = `共有 ${itemsCount - 1} 条数据    页码：${currentPage}/${pageCount}`;
+  document.getElementById("page-info").textContent = `共有 ${itemsCount - 1} 条数据    页码：${currentPage}/${pageCount}`;
 
-      pageNums.innerHTML = "";
+  pageNums.innerHTML = "";
 
-      if (itemsCount <= itemsPerPage + 1) {
-        prevPageBtn.setAttribute("disabled", "");
-        nextPageBtn.setAttribute("disabled", "");
-        return;
-      }
+  if (itemsCount <= itemsPerPage + 1) {
+    prevPageBtn.setAttribute("disabled", "");
+    nextPageBtn.setAttribute("disabled", "");
+    return;
+  }
 
-      prevPageBtn.removeAttribute("disabled");
-      nextPageBtn.removeAttribute("disabled");
+  prevPageBtn.removeAttribute("disabled");
+  nextPageBtn.removeAttribute("disabled");
 
-      for (let i = 1; i <= Math.min(5, pageCount); i++) {
-        const button = document.createElement("button");
-        button.textContent = i;
-        button.addEventListener("click", () => {
-          currentPage = i;
-          displayExcelData(tableData, (i - 1) * itemsPerPage + 1);
-          createPagination(itemsCount);
-        });
-        pageNums.appendChild(button);
-      }
+  const startPage = Math.max(1, currentPage - 2);
+  const endPage = Math.min(pageCount, currentPage + 2);
 
-      if (pageCount > 5) {
-        pageNums.innerHTML += "...";
-      }
+  if (currentPage !== 1) {
+    const button = document.createElement("button");
+    button.textContent = "1";
+    button.addEventListener("click", () => {
+      currentPage = 1;
+      displayExcelData(tableData, (currentPage - 1) * itemsPerPage + 1);
+      createPagination(itemsCount);
+    });
+    pageNums.appendChild(button);
 
-      prevPageBtn.addEventListener("click", () => {
-        if (currentPage > 1) {
-          currentPage--;
-          displayExcelData(tableData, (currentPage - 1) * itemsPerPage + 1);
-          createPagination(itemsCount);
-        }
-      });
-
-      nextPageBtn.addEventListener("click", () => {
-        if (currentPage < pageCount) {
-          currentPage++;
-          displayExcelData(tableData, (currentPage - 1) * itemsPerPage + 1);
-          createPagination(itemsCount);
-        }
-      });
+    if (startPage > 2) {
+      const ellipsis = document.createElement("span");
+      ellipsis.textContent = "...";
+      pageNums.appendChild(ellipsis);
     }
+  }
+
+  for (let i = startPage; i <= endPage; i++) {
+    const button = document.createElement("button");
+    button.textContent = i;
+    button.addEventListener("click", () => {
+      currentPage = i;
+      displayExcelData(tableData, (currentPage - 1) * itemsPerPage + 1);
+      createPagination(itemsCount);
+    });
+    pageNums.appendChild(button);
+  }
+
+  if (currentPage !== pageCount) {
+    if (endPage < pageCount - 1) {
+      const ellipsis = document.createElement("span");
+      ellipsis.textContent = "...";
+      pageNums.appendChild(ellipsis);
+    }
+
+    const button = document.createElement("button");
+    button.textContent = pageCount;
+    button.addEventListener("click", () => {
+      currentPage = pageCount;
+      displayExcelData(tableData, (currentPage - 1) * itemsPerPage + 1);
+      createPagination(itemsCount);
+    });
+    pageNums.appendChild(button);
+  }
+
+  if (currentPage === 1) {
+    prevPageBtn.setAttribute("disabled", "");
+  }
+
+  if (currentPage === pageCount) {
+    nextPageBtn.setAttribute("disabled", "");
+  }
+
+  prevPageBtn.onclick = () => {
+    if (currentPage > 1) {
+      currentPage--;
+      displayExcelData(tableData, (currentPage - 1) * itemsPerPage + 1);
+      createPagination(itemsCount);
+    }
+  };
+
+  nextPageBtn.onclick = () => {
+    if (currentPage < pageCount) {
+      currentPage++;
+      displayExcelData(tableData, (currentPage - 1) * itemsPerPage + 1);
+      createPagination(itemsCount);
+    }
+  };
+}
+
 
     function loadData() {
       fetch("/data.xlsx")
