@@ -20,7 +20,7 @@
   </style>
 </head>
 <body>
-  <h1>2023年收鸽信息</h1>
+  <p style="font-size: 18px;">长春市信鸽代收中心2023年收鸽信息</p>
   <input type="text" id="search-input" placeholder="请输入信息">
   <button id="search-button">搜索</button>
   <button id="download-excel-data"><a href="data.xlsx" download="data.xlsx" style="text-decoration: none; color: inherit;">下载文件</a></button>
@@ -44,7 +44,7 @@
   <script>
     let tableData = [];
     let currentPage = 1;
-    let filteredData = []; // 新增代码
+    let filteredData = [];
     const itemsPerPage = 50;
 
     function displayExcelData(data, startIndex) {
@@ -80,24 +80,24 @@
     function searchTableData(keyword) {
       if (!tableData.length) return;
 
-      filteredData = tableData.filter(row => { // 修改了这一行，将搜索结果赋值给 filteredData 变量
+      filteredData = tableData.filter(row => {
         return row.some(cell => {
           return cell.toString().toLowerCase().includes(keyword.toLowerCase());
         });
       });
-      currentPage = 1; // 新增代码，重置当前页数为 1
+      currentPage = 1;
       displayExcelData([tableData[0], ...filteredData], 1);
       createPagination(filteredData.length);
     }
 
-    function createPagination(itemsCount) {
+    function createPagination(itemsCount, isFilteredData) {
   const prevPageBtn = document.getElementById("prev-page");
   const nextPageBtn = document.getElementById("next-page");
   const pageNums = document.getElementById("page-numbers");
 
   const pageCount = Math.ceil((itemsCount - 1) / itemsPerPage);
 
-  document.getElementById("page-info").textContent = `共有 ${itemsCount - 1} 条数据    页码：${currentPage}/${pageCount}`;
+  document.getElementById("page-info").textContent = `共有 ${itemsCount - 1} 条数据 页码：${currentPage}/${pageCount}`;
 
   pageNums.innerHTML = "";
 
@@ -110,22 +110,23 @@
   prevPageBtn.removeAttribute("disabled");
   nextPageBtn.removeAttribute("disabled");
 
-  const startPage = Math.max(1, currentPage - 2);
-  const endPage = Math.min(pageCount, currentPage + 2);
+  const startPage = Math.max(2, currentPage - 2);
+  const endPage = Math.min(pageCount - 1, currentPage + 2);
 
   if (currentPage !== 1) {
     const button = document.createElement("button");
     button.textContent = "1";
     button.addEventListener("click", () => {
       currentPage = 1;
-      displayExcelData(tableData, (currentPage - 1) * itemsPerPage + 1);
-      createPagination(itemsCount);
+      const dataToDisplay = filteredData.length > 0 ? [tableData[0], ...filteredData] : tableData;
+      displayExcelData(dataToDisplay, (currentPage - 1) * itemsPerPage + (filteredData.length > 0 ? 0 : 1));
+      createPagination(itemsCount, filteredData.length > 0);
     });
     pageNums.appendChild(button);
 
     if (startPage > 2) {
       const ellipsis = document.createElement("span");
-      ellipsis.textContent = "...";
+      ellipsis.textContent = "... ";
       pageNums.appendChild(ellipsis);
     }
   }
@@ -135,8 +136,9 @@
     button.textContent = i;
     button.addEventListener("click", () => {
       currentPage = i;
-      displayExcelData(tableData, (currentPage - 1) * itemsPerPage + 1);
-      createPagination(itemsCount);
+      const dataToDisplay = filteredData.length > 0 ? [tableData[0], ...filteredData] : tableData;
+      displayExcelData(dataToDisplay, (currentPage - 1) * itemsPerPage + (filteredData.length > 0 ? 0 : 1));
+      createPagination(itemsCount, filteredData.length > 0);
     });
     pageNums.appendChild(button);
   }
@@ -144,7 +146,7 @@
   if (currentPage !== pageCount) {
     if (endPage < pageCount - 1) {
       const ellipsis = document.createElement("span");
-      ellipsis.textContent = "...";
+      ellipsis.textContent = "... ";
       pageNums.appendChild(ellipsis);
     }
 
@@ -152,8 +154,9 @@
     button.textContent = pageCount;
     button.addEventListener("click", () => {
       currentPage = pageCount;
-      displayExcelData(tableData, (currentPage - 1) * itemsPerPage + 1);
-      createPagination(itemsCount);
+      const dataToDisplay = filteredData.length > 0 ? [tableData[0], ...filteredData] : tableData;
+      displayExcelData(dataToDisplay, (currentPage - 1) * itemsPerPage + (filteredData.length > 0 ? 0 : 1));
+      createPagination(itemsCount, filteredData.length > 0);
     });
     pageNums.appendChild(button);
   }
@@ -169,48 +172,52 @@
   prevPageBtn.onclick = () => {
     if (currentPage > 1) {
       currentPage--;
-      displayExcelData(tableData, (currentPage - 1) * itemsPerPage + 1);
-      createPagination(itemsCount);
+      const dataToDisplay = filteredData.length > 0 ? [tableData[0], ...filteredData] : tableData;
+      displayExcelData(dataToDisplay, (currentPage - 1) * itemsPerPage + (filteredData.length > 0 ? 0 : 1));
+      createPagination(itemsCount, filteredData.length > 0);
     }
   };
 
   nextPageBtn.onclick = () => {
     if (currentPage < pageCount) {
       currentPage++;
-      displayExcelData(tableData, (currentPage - 1) * itemsPerPage + 1);
-      createPagination(itemsCount);
+      const dataToDisplay = filteredData.length > 0 ? [tableData[0], ...filteredData] : tableData;
+      displayExcelData(dataToDisplay, (currentPage - 1) * itemsPerPage + (filteredData.length > 0 ? 0 : 1));
+      createPagination(itemsCount, filteredData.length > 0);
     }
   };
 }
 
 
-    function loadData() {
-      fetch("/data.xlsx")
-        .then((response) => response.arrayBuffer())
-        .then((buffer) => {
-          const data = new Uint8Array(buffer);
-          const workbook = XLSX.read(data, { type: "array" });
-          const sheetName = workbook.SheetNames[0];
-          const sheet = workbook.Sheets[sheetName];
-          const json = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: "" });
 
-          tableData = json;
-          displayExcelData(json, 1);
-          createPagination(json.length);
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-    }
+function loadData() {
+  fetch("/data.xlsx")
+    .then((response) => response.arrayBuffer())
+    .then((buffer) => {
+      const data = new Uint8Array(buffer);
+      const workbook = XLSX.read(data, { type: "array" });
+      const sheetName = workbook.SheetNames[0];
+      const sheet = workbook.Sheets[sheetName];
+      const json = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: "" });
 
-    document.getElementById("search-button").addEventListener("click", () => {
-      const searchInput = document.getElementById("search-input");
-      searchTableData(searchInput.value);
+      tableData = json;
+      displayExcelData(json, 1);
+      createPagination(json.length);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
     });
+}
 
-    // Load data on page load
-    loadData();
+document.getElementById("search-button").addEventListener("click", () => {
+  const searchInput = document.getElementById("search-input");
+  searchTableData(searchInput.value);
+});
+
+// Load data on page load
+loadData();
   </script>
   <script src="https://unpkg.com/xlsx@0.17.0/dist/xlsx.full.min.js"></script>
 </body>
 </html>
+
