@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server/server.js",
     "dev": "nodemon server/server.js",
-    "test": "echo \"No tests available\""
+    "test": "echo \"No tests available\"",
+    "build": "echo 'No build step required'"
   },
   "keywords": [
     "your",
