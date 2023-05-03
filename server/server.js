@@ -29,7 +29,7 @@ app.post('/api/message', async (req, res) => {
     chatHistory[sessionId].push({ role: 'user', content: message });
 
     const completion = await openai.createChatCompletion({
-      model: 'gpt-3.5-turbo',
+      model: 'gpt-4',
       messages: chatHistory[sessionId],
     });
 
