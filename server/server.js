@@ -28,6 +28,12 @@ app.post('/api/message', async (req, res) => {
 
     chatHistory[sessionId].push({ role: 'user', content: message });
 
+    let messagesText = chatHistory[sessionId].map(m => m.content).join('');
+    while (messagesText.length > 2048) {
+      chatHistory[sessionId].shift();
+      messagesText = chatHistory[sessionId].map(m => m.content).join('');
+    }
+    
     const completion = await openai.createChatCompletion({
       model: 'gpt-4',
       messages: chatHistory[sessionId],
