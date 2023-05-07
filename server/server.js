@@ -35,7 +35,7 @@ app.post('/api/message', async (req, res) => {
     }
     
     const completion = await openai.createChatCompletion({
-      model: 'gpt-4',
+      model: 'gpt-3.5-turbo',
       messages: chatHistory[sessionId],
     });
 
